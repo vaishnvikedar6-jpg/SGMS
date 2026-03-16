@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Support | We're Here For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --princess-pink: #fbcfe8;
+            --deep-purple: #4c1d95;
+            --soft-purple: #a78bfa;
+            --danger-red: #be123c;
+            --white: rgba(255, 255, 255, 0.9);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            margin: 0;
+            padding: 20px;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(76, 29, 149, 0.7), rgba(219, 39, 119, 0.6));
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px; 
+            border-radius: 35px; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .header { text-align: center; margin-bottom: 30px; }
+        
+        h2 { 
+            margin: 0; 
+            font-size: 30px; 
+            font-weight: 800; 
+            color: var(--deep-purple);
+            letter-spacing: -0.5px;
+        }
+
+        p.description {
+            color: #5b21b6;
+            font-size: 15px;
+            margin-top: 8px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .form-group { margin-bottom: 18px; }
+
+        label { 
+            display: block; 
+            margin-bottom: 6px; 
+            font-weight: 600; 
+            font-size: 13px;
+            color: var(--deep-purple);
+            margin-left: 5px;
+        }
+
+        input, textarea, select { 
+            width: 100%; 
+            padding: 14px 18px; 
+            border: 1px solid rgba(167, 139, 250, 0.3); 
+            border-radius: 18px; 
+            box-sizing: border-box; 
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus, select:focus { 
+            outline: none;
+            border-color: var(--soft-purple);
+            box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.2);
+            background: #fff;
+        }
+
+        .bullying-section {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border: 1px solid rgba(190, 18, 60, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--danger-red);
+        }
+
+        .checkbox-label {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--danger-red);
+        }
+
+        .btn { 
+            width: 100%; 
+            background: linear-gradient(135deg, #7c3aed, #db2777); 
+            color: white; 
+            border: none; 
+            padding: 16px; 
+            border-radius: 18px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 700; 
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 15px 20px -5px rgba(124, 58, 237, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .admin-link { 
+            color: var(--deep-purple); 
+            text-decoration: none; 
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 0.6;
+        }
+
+        .admin-link:hover { opacity: 1; text-decoration: underline; }
+
+        textarea { height: 90px; resize: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <h2>Speak Your Heart.</h2>
+                <p class="description">We are here to support you, always.</p>
+            </div>
+
+            <form id="grievanceForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" required placeholder="Tell us who you are">
+                </div>
+
+                <div class="form-group">
+                    <label>Student ID (PRN)</label>
+                    <input type="text" id="prn" required placeholder="Enter your PRN">
+                </div>
+
+                <div class="form-group">
+                    <label>What's the issue?</label>
+                    <select id="category">
+                        <option>Academic Help</option>
+                        <option>College Infrastructure</option>
+                        <option>Wellbeing & Support</option>
+                        <option>Other Concerns</option>
+                    </select>
+                </div>
+
+                <div class="bullying-section">
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="isBullying">
+                        <span class="checkbox-label">Reporting Harassment</span>
+                    </label>
+                    <p style="font-size: 12px; color: #9f1239; margin: 8px 0 0 32px; font-weight: 500;">
+                        This stays between us. The Dean will take care of it immediately.
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <label>Tell us everything</label>
+                    <textarea id="complaint" required placeholder="Don't hesitate to share details..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Submit for Support</button>
+            </form>
+
+            <div class="footer">
+                <a href="adminform.html" class="admin-link">Staff Login Area</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('grievanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const isBullying = document.getElementById('isBullying').checked;
+            const grievance = {
+                id: Date.now(),
+                name: document.getElementById('name').value,
+                prn: document.getElementById('prn').value,
+                category: isBullying ? "🚨 URGENT" : document.getElementById('category').value,
+                text: document.getElementById('complaint').value,
+                status: "Pending",
+                date: new Date().toLocaleDateString()
+            };
+
+            // Save to Local Storage
+            let list = JSON.parse(localStorage.getItem('grievances')) || [];
+            list.push(grievance);
+            localStorage.setItem('grievances', JSON.stringify(list));
+
+            alert(isBullying ? 
+                "We're with you. Your report is prioritized. Someone will reach out soon." : 
+                "Your grievance is recorded. We'll look into it soon.");
+            
+            // Redirect to Student Dashboard
+            window.location.href = "dashboard.html";
+        });
+    </script>
+</body>
+</html>
