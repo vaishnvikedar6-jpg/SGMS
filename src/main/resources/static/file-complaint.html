@@ -4,76 +4,148 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elite | File Complaint</title>
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: #fff5f0; min-height: 100vh; padding: 40px; display: flex; justify-content: center; align-items: center; }
-    .form-card {
-        width: 100%;
-        max-width: 700px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(20px);
-        padding: 50px;
-        border-radius: 50px;
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        box-shadow: 0 30px 60px rgba(247, 37, 133, 0.08);
+
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Plus Jakarta Sans',sans-serif;
     }
-    h2 { color: #4a041a; font-size: 2.2rem; margin-bottom: 30px; letter-spacing: -1.5px; }
-    h2 span { background: linear-gradient(135deg, #f72585, #ffb703); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .input-box { margin-bottom: 25px; text-align: left; }
-    label { display: block; margin-bottom: 10px; font-weight: 700; color: #8a6a76; font-size: 0.9rem; margin-left: 10px; }
-    input, select, textarea {
-        width: 100%;
-        padding: 18px 25px;
-        border-radius: 25px;
-        border: 1px solid #ffdeeb;
-        background: rgba(255, 255, 255, 0.9);
-        outline: none;
-        transition: 0.3s;
-        color: #4a041a;
-        font-size: 1rem;
+
+    body{
+    background:#fff5f0;
+    min-height:100vh;
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     }
-    input:focus, textarea:focus { border-color: #f72585; box-shadow: 0 0 15px rgba(247, 37, 133, 0.1); transform: translateY(-2px); }
-    .submit-btn {
-        width: 100%;
-        padding: 20px;
-        background: linear-gradient(135deg, #f72585, #ffb703);
-        border: none;
-        border-radius: 25px;
-        color: white;
-        font-weight: 800;
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        cursor: pointer;
-        box-shadow: 0 15px 30px rgba(247, 37, 133, 0.3);
-        transition: 0.4s;
+
+    .form-card{
+    width:100%;
+    max-width:700px;
+    background:rgba(255,255,255,0.9);
+    padding:50px;
+    border-radius:40px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.1);
     }
-    .submit-btn:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(247, 37, 133, 0.4); }
+
+    h2{
+    color:#4a041a;
+    font-size:2rem;
+    margin-bottom:25px;
+    }
+
+    .input-box{
+    margin-bottom:20px;
+    }
+
+    label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:600;
+    }
+
+    input,select,textarea{
+    width:100%;
+    padding:14px;
+    border-radius:15px;
+    border:1px solid #ddd;
+    font-size:1rem;
+    }
+
+    .submit-btn{
+    width:100%;
+    padding:16px;
+    background:linear-gradient(135deg,#f72585,#ffb703);
+    border:none;
+    border-radius:20px;
+    color:white;
+    font-weight:bold;
+    font-size:1rem;
+    cursor:pointer;
+    }
+
+    .submit-btn:hover{
+    opacity:0.9;
+    }
   </style>
 </head>
+
 <body>
+
 <div class="form-card">
-  <h2>New <span>Grievance</span> 💌</h2>
-  <form>
+
+  <h2>New Grievance</h2>
+
+  <form id="complaintForm">
+
     <div class="input-box">
       <label>Department</label>
-      <select>
+      <select id="department">
         <option>Academic Affairs</option>
         <option>Hostel & Infrastructure</option>
         <option>Technical Support</option>
       </select>
     </div>
+
     <div class="input-box">
       <label>Subject</label>
-      <input type="text" placeholder="Short summary of the issue">
+      <input type="text" id="title" placeholder="Short summary of the issue" required>
     </div>
+
     <div class="input-box">
       <label>Detailed Description</label>
-      <textarea rows="5" placeholder="Tell us more..."></textarea>
+      <textarea id="description" rows="5" placeholder="Tell us more..." required></textarea>
     </div>
+
     <button type="submit" class="submit-btn">Submit Request</button>
+
   </form>
+
 </div>
+
+<script>
+
+  document.addEventListener("DOMContentLoaded", function(){
+
+  document.getElementById("complaintForm").addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("description").value;
+
+  const complaint = {
+  title: title,
+  description: description,
+  status: "Pending"
+  };
+
+  fetch("http://localhost:8080/api/complaints", {
+  method: "POST",
+  headers: {
+  "Content-Type": "application/json"
+  },
+  body: JSON.stringify(complaint)
+  })
+  .then(response => response.json())
+  .then(data => {
+  alert("Complaint submitted successfully!");
+  document.getElementById("complaintForm").reset();
+  })
+  .catch(error => {
+  console.error("Error:", error);
+  });
+
+  });
+
+  });
+
+</script>
+
 </body>
 </html>
